@@ -1,14 +1,14 @@
-// src/components/Contact.tsx
 "use client";
 
+import axios from "axios";
 import { useState } from "react";
 import { personalInfo } from "@/data/portfolio";
 import { Send, Github, Linkedin } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 type FormData = {
-  name:    string;
-  email:   string;
+  name: string;
+  email: string;
   subject: string;
   message: string;
 };
@@ -26,9 +26,10 @@ export default function Contact() {
   const onSubmit = async (data: FormData) => {
     setStatus("loading");
     try {
-      // Phase 1: placeholder — will call FastAPI in Phase 3
-      // const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`, data);
-      await new Promise((r) => setTimeout(r, 1200)); // simulate request
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/contact`,
+        data
+      );
       setStatus("success");
       reset();
     } catch {
@@ -51,15 +52,15 @@ export default function Contact() {
           </p>
           <div className="space-y-3">
             <a href={`mailto:${personalInfo.email}`}
-               className="flex items-center gap-3 text-text-secondary hover:text-accent transition-colors text-sm">
+              className="flex items-center gap-3 text-text-secondary hover:text-accent transition-colors text-sm">
               <span className="text-accent">→</span> {personalInfo.email}
             </a>
             <a href={personalInfo.github} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-3 text-text-secondary hover:text-accent transition-colors text-sm">
+              className="flex items-center gap-3 text-text-secondary hover:text-accent transition-colors text-sm">
               <Github size={14} className="text-accent" /> github.com/MoorthySivabalan
             </a>
             <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer"
-               className="flex items-center gap-3 text-text-secondary hover:text-accent transition-colors text-sm">
+              className="flex items-center gap-3 text-text-secondary hover:text-accent transition-colors text-sm">
               <Linkedin size={14} className="text-accent" /> linkedin.com/in/moorthysivabalan
             </a>
           </div>
@@ -68,9 +69,9 @@ export default function Contact() {
         {/* Right — form */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {[
-            { id: "name",    label: "Your Name",    type: "text",  placeholder: "John Doe" },
-            { id: "email",   label: "Email Address",type: "email", placeholder: "john@example.com" },
-            { id: "subject", label: "Subject",      type: "text",  placeholder: "Job opportunity / Collaboration" },
+            { id: "name", label: "Your Name", type: "text", placeholder: "John Doe" },
+            { id: "email", label: "Email Address", type: "email", placeholder: "john@example.com" },
+            { id: "subject", label: "Subject", type: "text", placeholder: "Job opportunity / Collaboration" },
           ].map(({ id, label, type, placeholder }) => (
             <div key={id}>
               <label className="block text-text-secondary text-sm font-medium mb-1.5">{label}</label>
