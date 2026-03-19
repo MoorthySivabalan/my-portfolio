@@ -1,4 +1,4 @@
-// src/components/Skills.tsx
+import ScrollReveal from "@/components/ScrollReveal";
 import { skills } from "@/data/portfolio";
 
 const categories = ["Language", "Frontend", "Backend", "Database", "Cloud", "Tools"];
@@ -21,22 +21,24 @@ export default function Skills() {
                   {cat}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {catSkills.map((skill) => (
-                    <div key={skill.name} className="card group">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-text-primary text-sm font-medium">
-                          {skill.name}
-                        </span>
-                        <span className="text-accent text-xs font-mono">{skill.level}%</span>
-                      </div>
-                      <div className="h-1 bg-border rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-accent rounded-full transition-all duration-700
+                  {catSkills.map((skill, i) => (
+                    <ScrollReveal key={skill.name} direction="up" delay={i * 80}>
+                      <div className="card group">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-text-primary text-sm font-medium">
+                            {skill.name}
+                          </span>
+                          <span className="text-accent text-xs font-mono">{skill.level}%</span>
+                        </div>
+                        <div className="h-1 bg-border rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-accent rounded-full transition-all duration-700
                                      group-hover:bg-indigo-soft"
-                          style={{ width: `${skill.level}%` }}
-                        />
+                            style={{ width: `${skill.level}%` }}
+                          />
+                        </div>
                       </div>
-                    </div>
+                    </ScrollReveal>
                   ))}
                 </div>
               </div>

@@ -64,13 +64,12 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 overflow-hidden",
         scrolled
           ? [
             // Glossy glass effect when scrolled
             "bg-[#0a0a0f]/70",
             "backdrop-blur-xl",
-            "border-b border-white/[0.06]",
             "shadow-[0_4px_24px_rgba(0,0,0,0.4)]",
             // Subtle top highlight line for glass feel
             "before:absolute before:inset-x-0 before:top-0 before:h-px",

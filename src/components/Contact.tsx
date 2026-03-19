@@ -42,7 +42,7 @@ export default function Contact() {
       <p className="section-subtitle">get in touch</p>
       <h2 className="section-title">Contact Me</h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mt-12">
         {/* Left — info */}
         <div className="space-y-6">
           <p className="text-text-secondary leading-relaxed">

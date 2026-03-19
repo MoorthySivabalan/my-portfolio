@@ -1,4 +1,4 @@
-// src/components/About.tsx
+import ScrollReveal from "@/components/ScrollReveal";
 import { personalInfo } from "@/data/portfolio";
 import { MapPin, Mail, Phone } from "lucide-react";
 
@@ -106,8 +106,8 @@ export default function About() {
 
           {[
             { icon: MapPin, label: "Location", value: personalInfo.location },
-            { icon: Mail,   label: "Email",    value: personalInfo.email    },
-            { icon: Phone,  label: "Phone",    value: personalInfo.phone    },
+            { icon: Mail, label: "Email", value: personalInfo.email },
+            { icon: Phone, label: "Phone", value: personalInfo.phone },
           ].map(({ icon: Icon, label, value }) => (
             <div key={label} className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
@@ -118,7 +118,7 @@ export default function About() {
                 <p className="text-text-secondary text-xs font-medium uppercase tracking-wider mb-0.5">
                   {label}
                 </p>
-                <p className="text-text-primary text-base">{value}</p>
+                <p className="text-text-primary text-base break-all">{value}</p>
               </div>
             </div>
           ))}
@@ -153,68 +153,67 @@ export default function About() {
             {timeline.map((item, index) => {
               const isLeft = index % 2 === 0;
               return (
-                <div key={index} className="relative flex items-center justify-between gap-4">
+                <ScrollReveal key={index} direction={index % 2 === 0 ? "left" : "right"} delay={index * 80}>
+                  <div className="relative flex items-center justify-between gap-4">
 
-                  {/* Left side content */}
-                  <div className={`w-[46%] ${isLeft ? "block" : "invisible"}`}>
-                    {isLeft && (
-                      <div className="bg-bg-secondary border border-border rounded-xl p-5 hover:border-accent/40 hover:shadow-[0_0_20px_rgba(0,212,200,0.05)] transition-all duration-300 text-right">
-                        <span
-                          className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-3 ${
-                            item.type === "work"
-                              ? "bg-indigo-soft/10 text-indigo-soft border border-indigo-soft/20"
-                              : "bg-accent/10 text-accent border border-accent/20"
+                    {/* Left side content */}
+                    <div className={`w-[46%] ${isLeft ? "block" : "invisible"}`}>
+                      {isLeft && (
+                        <div className="bg-bg-secondary border border-border rounded-xl p-5 hover:border-accent/40 hover:shadow-[0_0_20px_rgba(0,212,200,0.05)] transition-all duration-300 text-right">
+                          <span
+                            className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-3 ${item.type === "work"
+                                ? "bg-indigo-soft/10 text-indigo-soft border border-indigo-soft/20"
+                                : "bg-accent/10 text-accent border border-accent/20"
+                              }`}
+                          >
+                            {item.year}
+                          </span>
+                          <h4 className="text-text-primary font-semibold text-base mb-1">
+                            {item.title}
+                          </h4>
+                          <p className="text-accent text-sm mb-0.5">{item.subtitle}</p>
+                          <p className="text-text-secondary text-xs mb-2">{item.location}</p>
+                          <p className="text-text-secondary text-xs font-mono border-t border-border pt-2 mt-2">
+                            {item.detail}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Center dot */}
+                    <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center z-10">
+                      <div
+                        className={`w-4 h-4 rounded-full border-2 border-bg-primary ${item.type === "work" ? "bg-indigo-soft" : "bg-accent"
                           }`}
-                        >
-                          {item.year}
-                        </span>
-                        <h4 className="text-text-primary font-semibold text-base mb-1">
-                          {item.title}
-                        </h4>
-                        <p className="text-accent text-sm mb-0.5">{item.subtitle}</p>
-                        <p className="text-text-secondary text-xs mb-2">{item.location}</p>
-                        <p className="text-text-secondary text-xs font-mono border-t border-border pt-2 mt-2">
-                          {item.detail}
-                        </p>
-                      </div>
-                    )}
-                  </div>
+                      />
+                    </div>
 
-                  {/* Center dot */}
-                  <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center z-10">
-                    <div
-                      className={`w-4 h-4 rounded-full border-2 border-bg-primary ${
-                        item.type === "work" ? "bg-indigo-soft" : "bg-accent"
-                      }`}
-                    />
-                  </div>
+                    {/* Right side content */}
+                    <div className={`w-[46%] ${!isLeft ? "block" : "invisible"}`}>
+                      {!isLeft && (
+                        <div className="bg-bg-secondary border border-border rounded-xl p-5 hover:border-accent/40 hover:shadow-[0_0_20px_rgba(0,212,200,0.05)] transition-all duration-300 text-left">
+                          <span
+                            className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-3 ${item.type === "work"
+                                ? "bg-indigo-soft/10 text-indigo-soft border border-indigo-soft/20"
+                                : "bg-accent/10 text-accent border border-accent/20"
+                              }`}
+                          >
+                            {item.year}
+                          </span>
+                          <h4 className="text-text-primary font-semibold text-base mb-1">
+                            {item.title}
+                          </h4>
+                          <p className="text-accent text-sm mb-0.5">{item.subtitle}</p>
+                          <p className="text-text-secondary text-xs mb-2">{item.location}</p>
+                          <p className="text-text-secondary text-xs font-mono border-t border-border pt-2 mt-2">
+                            {item.detail}
+                          </p>
+                        </div>
+                      )}
+                    </div>
 
-                  {/* Right side content */}
-                  <div className={`w-[46%] ${!isLeft ? "block" : "invisible"}`}>
-                    {!isLeft && (
-                      <div className="bg-bg-secondary border border-border rounded-xl p-5 hover:border-accent/40 hover:shadow-[0_0_20px_rgba(0,212,200,0.05)] transition-all duration-300 text-left">
-                        <span
-                          className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-3 ${
-                            item.type === "work"
-                              ? "bg-indigo-soft/10 text-indigo-soft border border-indigo-soft/20"
-                              : "bg-accent/10 text-accent border border-accent/20"
-                          }`}
-                        >
-                          {item.year}
-                        </span>
-                        <h4 className="text-text-primary font-semibold text-base mb-1">
-                          {item.title}
-                        </h4>
-                        <p className="text-accent text-sm mb-0.5">{item.subtitle}</p>
-                        <p className="text-text-secondary text-xs mb-2">{item.location}</p>
-                        <p className="text-text-secondary text-xs font-mono border-t border-border pt-2 mt-2">
-                          {item.detail}
-                        </p>
-                      </div>
-                    )}
                   </div>
-
-                </div>
+                </ScrollReveal>
               );
             })}
           </div>
